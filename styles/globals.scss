@@ -4,5 +4,7 @@
 *{
   font-family: $fontRegular;
   font-size: 15px;
-  color: $vermelho;
 }
+
+
+@import "../components/button/button.scss";

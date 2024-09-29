@@ -1,8 +1,9 @@
+import Button from "@/components/button";
 
 export default function Home() {
   return (
     <>
-      <h1>ola mundo</h1>
+      <Button texto={"login"} cor={"outline"} onclick={() => console.log("Botão CLicado")}/>
     </>
   );
 }
