@@ -6,6 +6,11 @@
   font-size: 15px;
 }
 
+html, body, #__next {
+  height: 100%;
+  margin: 0;
+}
+
 .avatar{
   border-radius: 50%;
   object-fit: cover;
@@ -15,5 +20,23 @@
   display: none;
 }
 
+input{
+  &::placeholder{
+     /* chrome, opera, safari e firefox */
+    color: $cinza2;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    /*ie 10-11*/
+    color: $cinza2;
+  }
+  &::-ms-input-placeholder {
+    color: $cinza2;
+  }
+}
+
 
 @import "../components/button/button.scss";
+@import '../components/button/button.scss';
+@import "./paginaPublica.scss";
+@import "../components/inputPublico/inputPublico.scss";
