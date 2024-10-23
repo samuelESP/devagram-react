@@ -52,7 +52,6 @@ export default function UploadImagem({
                 </div>
             )}
 
-            <button>teste</button>
             <input
                 type="file"
                 className="oculto"

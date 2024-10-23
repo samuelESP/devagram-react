@@ -36,7 +36,25 @@ input{
 }
 
 
+.desktop {
+  display: block;
+
+  @media screen and (max-width: calc($desktopBreakpoint - 1px)) {
+    display: none;
+  }
+}
+
+.mobile {
+  display: block;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    display: none;
+  }
+}
+
+
 @import "../components/button/button.scss";
 @import '../components/button/button.scss';
 @import "./paginaPublica.scss";
 @import "../components/inputPublico/inputPublico.scss";
+@import "../pages/cadastro/cadstro.scss";
