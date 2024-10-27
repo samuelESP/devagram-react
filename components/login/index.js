@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {validarEmail, validarSenha} from "../../utils/validadores"
 
 import InputPublico from "../inputPublico";
 
@@ -14,6 +15,14 @@ export default function Login() {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+
+
+    const validarFormulario = () => {
+        return (
+            validarEmail(email)
+            && validarSenha(senha)
+        );
+    }
 
     return (
         <section className={`paginaLogin paginaPublica`}>
@@ -35,8 +44,9 @@ export default function Login() {
                         texto="E-mail"
                         tipo="email"
                         aoAlterarValor={(e) => setEmail(e.target.value)}
-                        mensagemValidacao="O endereço informado é inválido"
                         valor={email}
+                        mensagemValidacao="O endereço informado é inválido"
+                        exibirMensagemValidacao={email && !validarEmail(email)}
                     />
 
                     <InputPublico
@@ -46,13 +56,13 @@ export default function Login() {
                         valor={senha}
                         aoAlterarValor={(e) => setSenha(e.target.value)}
                         mensagemValidacao="Necessario ter mais de 3 caracteres"
-
-                    />
+                        exibirMensagemValidacao={senha && !validarSenha(senha)}
+                        />
 
                     <Button
                         tipo="submit"
                         texto="Login"
-                        disable={false}
+                        disable={!validarFormulario()}
                     />
                 </form>
 

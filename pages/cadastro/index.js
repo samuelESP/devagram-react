@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { validarNome, validarSenha, validarEmail, confirmacaoDeSenha } from "@/utils/validadores";
 
 import Button from "@/components/button";
 import InputPublico from "@/components/inputPublico";
@@ -18,6 +19,16 @@ export default function Cadastro() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
+
+
+    const validarFormulario = () => {
+        return (
+            validarNome(nome)
+            && validarEmail(email)
+            && validarSenha(senha)
+            && confirmacaoDeSenha(senha, confirmacaoSenha)
+        );
+    }
 
     return (
         <section className={`paginaCadastro paginaPublica`}>
@@ -44,14 +55,18 @@ export default function Cadastro() {
                         tipo="text"
                         aoAlterarValor={(event) => setNome(event.target.value)}
                         valor={nome}
+                        mensagemValidacao="O nome precisa de pelo menos 2 caracteres"
+                        exibirMensagemValidacao={nome && !validarNome(nome)}
                     />
 
                     <InputPublico
                         imagem={imagemEnvelope}
                         texto="Email"
                         tipo="email"
-                        aoAlterarValor={(event) => setNome(event.target.value)}
+                        aoAlterarValor={(event) => setEmail(event.target.value)}
                         valor={email}
+                        mensagemValidacao="O e-mail informado é inválido!"
+                        exibirMensagemValidacao={email && !validarEmail(email)}
                     />
 
 
@@ -61,6 +76,8 @@ export default function Cadastro() {
                         tipo="password"
                         aoAlterarValor={(event) => setSenha(event.target.value)}
                         valor={senha}
+                        mensagemValidacao="Necessario ter mais de 3 caracteres"
+                        exibirMensagemValidacao={senha && !validarSenha(senha)}
                     />
 
                     <InputPublico
@@ -68,13 +85,15 @@ export default function Cadastro() {
                         texto="Confirmar senha"
                         tipo="password"
                         aoAlterarValor={(event) => setConfirmacaoSenha(event.target.value)}
-                        valor={senha}
+                        valor={confirmacaoSenha}
+                        mensagemValidacao="As senhas precisam ser iguais"
+                        exibirMensagemValidacao={confirmacaoSenha && !confirmacaoDeSenha(senha, confirmacaoSenha)}
                     />
 
                     <Button
                         texto="Cadastrar"
                         tipo="submit"
-                        disable={false}
+                        disable={!validarFormulario()}
                     />
                 </form>
 
